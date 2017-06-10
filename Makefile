@@ -12,7 +12,7 @@ LIBS =
 
 LDFLAGS =
 
-LDLIBS =
+LDLIBS = -lboost_locale
 
 TARGET = elephly
 
@@ -33,9 +33,12 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) -o $(TARGET) $(LDFLAGS) $(LDLIBS) $(OBJS) $(LIBS)
 
+run:
+	./$(TARGET)
+
 test: $(TESTS)
 
-%.test: %.cc $(TEST_OBJS)
+%.test: %.test.cc $(TEST_OBJS)
 	    $(CXX) -o $@ $(TEST_FLAGS) $(LDFLAGS) $(LDLIBS) $^ $(LIBS)
 
 %.check: %.test
