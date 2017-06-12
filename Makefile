@@ -22,7 +22,9 @@ TEST_SRCS = $(shell find tests/ -type f -name *.test.cc)
 
 TEST_OBJS = $(filter-out src/$(TARGET).o, $(OBJS))
 
-TEST_LIBS =
+TEST_LDFLAGS =
+
+TEST_LDLIBS = -lboost_unit_test_framework -lboost_locale
 
 TESTS = $(TEST_SRCS:.test.cc=.test)
 
@@ -39,7 +41,7 @@ run:
 test: $(TESTS)
 
 %.test: %.test.cc $(TEST_OBJS)
-	    $(CXX) -o $@ $(TEST_FLAGS) $(LDFLAGS) $(LDLIBS) $^ $(LIBS)
+	    $(CXX) -o $@ $(TEST_FLAGS) $(TEST_LDFLAGS) $(TEST_LDLIBS) $^ $(LIBS)
 
 %.check: %.test
 	    $<

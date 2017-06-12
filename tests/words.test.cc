@@ -1,54 +1,14 @@
 #define BOOST_TEST_MODULE Elephly tests
-#include <boost/test/included/unit_test.hpp>
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>
 
 #include <sstream>
 
 #include <Elephly/Words.h>
+#include "words.fixture.h"
 
 using namespace std;
 using namespace Elephly;
-
-/**
- * @brief Fixture for testing working with streams.
- */
-struct WordsFixture
-{
-    /**
-     * @brief Strings list to build a stream from and to compare against.
-     */
-    vector<wstring> strings
-    {
-        L"first word",
-        L"second word",
-        L"third word"
-    };
-
-    /**
-     * @brief Tested stream.
-     */
-    wistringstream istream;
-
-    /**
-     * @brief Built stream string.
-     */
-    wstring streamString;
-
-    /**
-     * @brief Initialize fixture.
-     */
-    WordsFixture()
-    {
-        streamString = strings[0];
-
-        for_each(strings.begin() + 1, strings.end(),
-                 [this](wstring const& s)
-        {
-            streamString.append(L"\n" + s);
-        });
-
-        istream.str(streamString);
-    }
-};
 
 BOOST_AUTO_TEST_SUITE(ElephlyWords)
 
@@ -63,12 +23,12 @@ BOOST_AUTO_TEST_CASE(construct_isEmpty)
 }
 
 /**
- * @brief Words are read and in valid order.
+ * @brief Words have been read in valid order.
  */
-BOOST_AUTO_TEST_CASE(readStream_wordsAreRead)
+BOOST_AUTO_TEST_CASE(readStream_allWordsHaveBeenRead)
 {
     Words words;
-    WordsFixture fix;
+    WordsFixture fix {};
 
     fix.istream >> words;
 
@@ -83,9 +43,9 @@ BOOST_AUTO_TEST_CASE(readStream_wordsAreRead)
 }
 
 /**
- * @brief Filter callback received valid values.
+ * @brief Filtering callback received valid values.
  */
-BOOST_AUTO_TEST_CASE(readStream_assignedFilter_filterReceivesValues)
+BOOST_AUTO_TEST_CASE(readStream_assignedFilter_filterReceivesValidValues)
 {
     Words words;
     WordsFixture fix;
@@ -108,7 +68,8 @@ BOOST_AUTO_TEST_CASE(readStream_assignedFilter_filterReceivesValues)
 BOOST_AUTO_TEST_CASE(readStream_assignedFilter_wordsAreFiltered)
 {
     Words words;
-    WordsFixture fix;
+    WordsFixture fix { L"qwe", L"asd", L"zxc" };
+    Words expected { L"qwe", L"zxc" };
 
     words.filter([&fix](size_t pos, wstring const& s)
     {
@@ -117,9 +78,7 @@ BOOST_AUTO_TEST_CASE(readStream_assignedFilter_wordsAreFiltered)
 
     fix.istream >> words;
 
-    BOOST_TEST(words.size() == 2);
-    BOOST_TEST(words[0] == fix.strings[0]);
-    BOOST_TEST(words[1] == fix.strings[2]);
+    BOOST_TEST(words == expected);
 }
 
 /**

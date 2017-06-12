@@ -3,12 +3,33 @@
 namespace Elephly
 {
 
-void Words::filter(filter_type const& f)
+/**
+ * @brief Append element to the end.
+ * @param s
+ */
+void Words::push_back(value_type const& s)
 {
-    filters_.emplace_back(f);
+    if (passFilter(s))
+    {
+        base_type::push_back(s);
+    }
 }
 
-bool Words::passFilter(std::wstring const& s)
+/**
+ * @brief Add a filtering callback.
+ * @param f
+ */
+void Words::filter(filter_type const& f)
+{
+    filters_.push_back(f);
+}
+
+/**
+ * @brief Test whether a string passes all filters.
+ * @param s
+ * @return
+ */
+bool Words::passFilter(value_type const& s)
 {
     if (filters_.empty())
         return true;
