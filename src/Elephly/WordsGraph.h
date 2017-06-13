@@ -1,9 +1,14 @@
+/**
+ * @file WordsGraph.h
+ * @brief WordsGraph class.
+ * @author Stanislav Yaranov
+ * @version 0.1
+ * @date 2017-06-14
+ */
+
 #ifndef ELEPHLY_WORDSGRAPH_H
 #define ELEPHLY_WORDSGRAPH_H
 
-#include <iterator>
-#include <algorithm>
-#include <utility>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graph_traits.hpp>
 
@@ -12,14 +17,14 @@
 namespace Elephly
 {
 
-    /**
-     * @brief Path finder for words using graph utils.
-     */
+/**
+ * @brief Path finder for words using graph utils.
+ */
 class WordsGraph
 {
 public:
     /**
-     * @brief Graph type.
+     * @brief Graph type to be used.
      */
     using Graph = boost::adjacency_list<
                   boost::listS,
@@ -39,13 +44,14 @@ public:
     using VertexIndex = boost::property_map<Graph, boost::vertex_index_t>::type;
 
     /**
-     * @brief Default constructor is deleted since graph shoud not be empty.
+     * @brief Default constructor is deleted
+     * as normally graph should not be empty.
      */
     WordsGraph() = delete;
 
     /**
      * @brief Get words collection.
-     * @return
+     * @return Words collection.
      */
     Words const& words() const
     {
@@ -54,7 +60,7 @@ public:
 
     /**
      * @brief Get processing graph.
-     * @return 
+     * @return Processing graph.
      */
     Graph const& graph() const
     {
@@ -62,8 +68,9 @@ public:
     }
 
     /**
-     * @brief Create object from words.
-     * @param words
+     * @brief Constructor.
+     * Create object from words.
+     * @param words Words collections to build graph from.
      */
     template<typename ...T>
     WordsGraph(T const&... words)
@@ -79,9 +86,9 @@ public:
     void search(Words::value_type const& from);
 
     /**
-     * @brief Get a path to specified word from calculated data.
-     * @param to
-     * @return
+     * @brief Get a path to specified word from previously calculated data.
+     * @param to A target word.
+     * @return Words collection with a path.
      */
     Words path(Words::value_type const& to);
 
@@ -89,7 +96,8 @@ public:
      * @brief Whether two words are neighbours.
      * @param lhs
      * @param rhs
-     * @return 
+     * @return True if lhs and lhs are same length and
+     *         differ with only one letter.
      */
     static bool neighbours(Words::value_type const& lhs,
                            Words::value_type const& rhs);
@@ -106,7 +114,8 @@ private:
     Graph graph_ {};
 
     /**
-     * Graph vertices index.
+     * @brief Graph vertices index.
+     * Will make it possible to get index of a vertex from its descriptor.
      */
     VertexIndex vertexIndex_;
 
@@ -121,12 +130,19 @@ private:
     std::vector<Vertex> predecessors_ {};
 
     /**
+     * @brief A word the last search was performed from.
+     */
+    Words::value_type from_;
+
+    /**
      * @brief Initialize graph from words.
      */
     void initGraph();
 
     /**
-     * @brief Append specified words to words collection.
+     * @brief Append words from a list of words collections.
+     * @param w Words collection to append words from.
+     * @param words Other words collections to append words from.
      */
     template<typename W, typename ...T>
     void append(W const& w, T const&... words)
@@ -136,7 +152,8 @@ private:
     }
 
     /**
-     * @brief Append specified words to words collection.
+     * @brief Append words from single words collection.
+     * @param w Words collection to append words from.
      */
     void append(Words const& w);
 }; // class WordsGraph

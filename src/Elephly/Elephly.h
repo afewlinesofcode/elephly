@@ -1,26 +1,34 @@
+/**
+ * @file Elephly.h
+ * @brief Elephly main class.
+ * @author Stanislav Yaranov
+ * @version 0.1
+ * @date 2017-06-14
+ */
+
 #ifndef ELEPHLY_ELEPHLY_H
 #define ELEPHLY_ELEPHLY_H
-
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/graph_traits.hpp>
-#include <boost/graph/dijkstra_shortest_paths.hpp>
 
 #include "Words.h"
 
 namespace Elephly
 {
 
+/**
+ * @brief Elephly the facade.
+ */
 class Elephly
 {
 public:
     /**
      * @brief Constructor.
+     * Initialize elephly path finder.
      */
     Elephly();
 
     /**
      * @brief Get source and target words container.
-     * @return
+     * @return Words container with source and target words.
      */
     Words& words()
     {
@@ -29,7 +37,7 @@ public:
 
     /**
      * @brief Get dictionary container.
-     * @return
+     * @return Words container with dictionary.
      */
     Words& dict()
     {
@@ -37,18 +45,18 @@ public:
     }
 
     /**
-     * Find the path from source to target words.
-     * @return
+     * @brief Find the path from source to target words.
+     * @return Words container with path words.
      */
     Words run();
 private:
     /**
-     * @brief Source and target words.
+     * @brief Source and target words container.
      */
     Words words_ {};
 
     /**
-     * @brief Dictionary.
+     * @brief Dictionary container.
      */
     Words dict_ {};
 }; // class Elephly

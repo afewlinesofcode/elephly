@@ -26,3 +26,8 @@ make test
 make run
 ```
 
+Очистить всё
+```
+make clean
+```
+

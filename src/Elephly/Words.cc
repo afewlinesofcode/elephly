@@ -1,3 +1,11 @@
+/**
+ * @file Words.cc
+ * @brief Words class.
+ * @author Stanislav Yaranov
+ * @version 0.1
+ * @date 2017-06-14
+ */
+
 #include "Words.h"
 
 namespace Elephly
@@ -5,7 +13,7 @@ namespace Elephly
 
 /**
  * @brief Append element to the end.
- * @param s
+ * @param s Appended element.
  */
 void Words::push_back(value_type const& s)
 {
@@ -17,7 +25,7 @@ void Words::push_back(value_type const& s)
 
 /**
  * @brief Add a filtering callback.
- * @param f
+ * @param f Filtering callback.
  */
 void Words::filter(filter_type const& f)
 {
@@ -26,7 +34,7 @@ void Words::filter(filter_type const& f)
 
 /**
  * @brief Get position of a word.
- * @return
+ * @return Index of a word in a collection or MAX_INT of not found.
  */
 Words::size_type Words::find(value_type const& s)
 {
@@ -42,8 +50,8 @@ Words::size_type Words::find(value_type const& s)
 
 /**
  * @brief Test whether a string passes all filters.
- * @param s
- * @return
+ * @param s Tested string.
+ * @return True if filters are passed.
  */
 bool Words::passFilter(value_type const& s)
 {

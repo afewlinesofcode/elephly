@@ -1,3 +1,11 @@
+/**
+ * @file Words.h
+ * @brief Words class.
+ * @author Stanislav Yaranov
+ * @version 0.1
+ * @date 2017-06-14
+ */
+
 #ifndef ELEPHLY_H
 #define ELEPHLY_H
 
@@ -12,7 +20,7 @@ namespace Elephly
 {
 
 /**
- * @brief Words container.
+ * @brief Extended vector container for manipulating words.
  */
 class Words: public std::vector<std::wstring>
 {
@@ -23,7 +31,7 @@ public:
     using base_type = std::vector<std::wstring>;
 
     /**
-     * @brief Container value type.
+     * @brief Container value type (a word type).
      */
     using value_type = base_type::value_type;
 
@@ -37,6 +45,7 @@ public:
      */
     using filter_type = std::function<bool(size_type, value_type const&)>;
 
+
     /*
      * Import base class constructors.
      */
@@ -44,27 +53,27 @@ public:
 
     /**
      * @brief Append element to the end.
-     * @param s
+     * @param s Appended element.
      */
     void push_back(value_type const& s);
 
     /**
      * @brief Add a filtering callback.
-     * @param f
+     * @param f Filtering callback.
      */
     void filter(filter_type const& f);
 
     /**
      * @brief Get position of a word.
-     * @return
+     * @return Index of a word in a collection or MAX_INT of not found.
      */
     size_type find(value_type const& s);
 
     /**
      * @brief Read word lines from input stream.
-     * @param is
-     * @param words
-     * @return 
+     * @param is Stream to read from.
+     * @param words Container to read into.
+     * @return Same stream.
      */
     friend std::wistream& operator>>(std::wistream& is, Words& words)
     {
@@ -81,9 +90,9 @@ public:
 
     /**
      * @brief Write words to output stream.
-     * @param os
-     * @param words
-     * @return 
+     * @param os Stream to write to.
+     * @param words Words to output.
+     * @return Same stream.
      */
     friend std::wostream& operator<<(std::wostream& os, Words const& words)
     {
@@ -105,14 +114,14 @@ public:
 
 private:
     /**
-     * @brief Vector of filtering callbacks.
+     * @brief Collection of filtering callbacks.
      */
     std::vector<filter_type> filters_ {};
 
     /**
      * @brief Test whether a string passes all filters.
-     * @param s
-     * @return 
+     * @param s Tested string.
+     * @return True if filters are passed.
      */
     bool passFilter(value_type const& s);
 }; // class Words
