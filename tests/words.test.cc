@@ -96,5 +96,25 @@ BOOST_AUTO_TEST_CASE(writeStream_fromFixture_outputIsValid)
     BOOST_TEST(os.str() == fix.streamString);
 }
 
+/**
+ * Gives index of an existing word in the collection.
+ */
+BOOST_AUTO_TEST_CASE(find_existingWord_returnsPos)
+{
+    Words words { L"qwe", L"asd", L"zxc" };
+
+    BOOST_TEST(words.find(L"asd") == 1);
+}
+
+/**
+ * Returns -1 if word is not in the collection.
+ */
+BOOST_AUTO_TEST_CASE(find_notExistingWord_returnsLimit)
+{
+    Words words { L"qwe", L"asd", L"zxc" };
+
+    BOOST_TEST(words.find(L"asdq") == std::numeric_limits<size_t>::max());
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

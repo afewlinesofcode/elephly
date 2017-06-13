@@ -6,7 +6,7 @@
 #include <functional>
 #include <iostream>
 #include <algorithm>
-
+#include <limits>
 
 namespace Elephly
 {
@@ -28,9 +28,14 @@ public:
     using value_type = base_type::value_type;
 
     /**
+     * @brief Container size type.
+     */
+    using size_type = base_type::size_type;
+
+    /**
      * @brief Filtering callback type.
      */
-    using filter_type = std::function<bool(size_t, value_type const&)>;
+    using filter_type = std::function<bool(size_type, value_type const&)>;
 
     /*
      * Import base class constructors.
@@ -48,6 +53,12 @@ public:
      * @param f
      */
     void filter(filter_type const& f);
+
+    /**
+     * @brief Get position of a word.
+     * @return
+     */
+    size_type find(value_type const& s);
 
     /**
      * @brief Read word lines from input stream.

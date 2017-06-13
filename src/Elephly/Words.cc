@@ -25,6 +25,22 @@ void Words::filter(filter_type const& f)
 }
 
 /**
+ * @brief Get position of a word.
+ * @return
+ */
+Words::size_type Words::find(value_type const& s)
+{
+    auto it = std::find(begin(), end(), s);
+
+    if (it == end())
+    {
+        return std::numeric_limits<size_type>::max();
+    }
+
+    return std::distance(begin(), it);
+}
+
+/**
  * @brief Test whether a string passes all filters.
  * @param s
  * @return
