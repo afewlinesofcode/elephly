@@ -11,6 +11,13 @@ namespace Elephly
  */
 void WordsGraph::search(Words::value_type const& from)
 {
+    auto it = std::find(words_.begin(), words_.end(), from);
+
+    if (it == words_.end())
+        throw std::runtime_error("Specified word is not in the collection");
+
+    // Init collections for calculated data
+
     auto p_map = make_iterator_property_map(
                      predecessors_.begin(),
                      boost::get(boost::vertex_index, graph_)
@@ -21,11 +28,7 @@ void WordsGraph::search(Words::value_type const& from)
                      boost::get(boost::vertex_index, graph_)
                  );
 
-    auto it = std::find(words_.begin(), words_.end(), from);
-
-    if (it == words_.end())
-        throw std::runtime_error("Specified word is not in the collection");
-
+    // Perform search
     boost::dijkstra_shortest_paths(
         graph_,
         boost::vertex(std::distance(words_.begin(), it), graph_),
@@ -43,13 +46,16 @@ Words WordsGraph::path(Words::value_type const& to)
     auto pos = words_.find(to);
     using Pos = decltype(pos);
 
+    // Test if the word is know.
     if (pos == std::numeric_limits<Pos>::max())
         return path;
 
+    // Collect path from predecessors collection.
     for (Pos p = vertexIndex_[predecessors_[pos]]; p != pos;
             pos = p, p = vertexIndex_[predecessors_[pos]])
         path.push_back(words_[p]);
 
+    // Since collecting from the end doing a reverse.
     std::reverse(path.begin(), path.end());
 
     return path;

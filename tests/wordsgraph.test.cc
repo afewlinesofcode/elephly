@@ -10,16 +10,6 @@ using namespace Elephly;
 BOOST_AUTO_TEST_SUITE(WordsGraphTests)
 
 /**
- * @brief Is constructable and initialized empty.
- */
-//BOOST_AUTO_TEST_CASE(construct_isEmpty)
-//{
-    //WordsGraph words{ };
-
-    //BOOST_TEST(words.words().empty());
-//}
-
-/**
  * @brief Is constructable with initializing words.
  */
 BOOST_AUTO_TEST_CASE(construct_withWords_allWordsAreConcatenated)

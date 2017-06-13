@@ -13,15 +13,6 @@ namespace Elephly
 class Elephly
 {
 public:
-    using Graph = boost::adjacency_list<
-                  boost::listS,
-                  boost::vecS,
-                  boost::undirectedS,
-                  boost::no_property,
-                  boost::property<boost::edge_weight_t, int>>;
-    using Vertex = boost::graph_traits<Graph>::vertex_descriptor;
-    using Edge = boost::graph_traits<Graph>::edge_descriptor;
-
     /**
      * @brief Constructor.
      */

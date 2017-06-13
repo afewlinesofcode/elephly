@@ -7,9 +7,6 @@
 
 BOOST_AUTO_TEST_SUITE(Elephly)
 
-/**
- * @brief Is constructable and initialized empty.
- */
 BOOST_AUTO_TEST_CASE(construct_isEmpty)
 {
     Elephly elephly;

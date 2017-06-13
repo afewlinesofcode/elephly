@@ -10,6 +10,7 @@ int main(int argc, char* argv[])
 
     ios_base::sync_with_stdio(false);
 
+    // Init locale
     boost::locale::generator gen;
     locale::global(std::locale { gen("") });
 
