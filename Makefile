@@ -30,15 +30,17 @@ TESTS = $(TEST_SRCS:.test.cc=.test)
 
 CHECKS = $(TESTS:.test=.check)
 
-all: $(TARGET)
+all: build build_test
+
+build: $(TARGET)
 
 $(TARGET): $(OBJS)
 	$(CXX) -o $(TARGET) $(LDFLAGS) $(LDLIBS) $(OBJS) $(LIBS)
 
 run:
-	./$(TARGET)
+	./$(TARGET) words.txt dict.txt
 
-test: $(TESTS)
+build_test: $(TESTS)
 
 %.test: %.test.cc $(TEST_OBJS)
 	    $(CXX) -o $@ $(TEST_FLAGS) $(TEST_LDFLAGS) $(TEST_LDLIBS) $^ $(LIBS)
@@ -46,7 +48,7 @@ test: $(TESTS)
 %.check: %.test
 	    $<
 
-check: $(CHECKS)
+test: $(CHECKS)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
