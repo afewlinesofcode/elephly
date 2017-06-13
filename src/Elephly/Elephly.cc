@@ -1,9 +1,14 @@
 #include "Elephly.h"
 
+#include <iostream>
+
+#include "WordsGraph.h"
+
 namespace Elephly
 {
 
 using namespace std;
+using namespace boost;
 
 Elephly::Elephly()
 {
@@ -46,7 +51,17 @@ Elephly::Elephly()
  */
 Words Elephly::run()
 {
-    return Words{};
+    if (words_.size() < 2)
+        throw std::runtime_error("Missing source or target word");
+
+    if (dict_.empty())
+        throw std::runtime_error("Dictionary is empty");
+
+    WordsGraph g { words_, dict_ };
+
+    g.search(words_[0]);
+
+    return g.path(words_[1]);
 }
 
 } // namespace Elephly
