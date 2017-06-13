@@ -2,8 +2,6 @@
 #include <fstream>
 #include <stdexcept>
 #include <boost/locale.hpp>
-#include <sstream>
-#include "../tests/words.fixture.h"
 #include "Elephly/Elephly.h"
 
 int main(int argc, char* argv[])
@@ -19,6 +17,7 @@ int main(int argc, char* argv[])
     if (argc < 3)
         throw std::runtime_error("Insufficient parameters");
 
+    // Setting up stream with words and dict
     std::wifstream words { argv[1] };
     std::wifstream dict { argv[2] };
 
@@ -28,9 +27,7 @@ int main(int argc, char* argv[])
     if (!dict.good())
         throw std::runtime_error("Unable to read dictionary");
 
-    //WordsFixture words { L"abc", L"xyz" };
-    //WordsFixture dict { L"abz", L"bbz", L"abx", L"xbz" };
-
+    // Effective path finder
     Elephly::Elephly elephly;
 
     words >> elephly.words();
