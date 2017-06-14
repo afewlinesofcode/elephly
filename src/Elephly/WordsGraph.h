@@ -93,7 +93,7 @@ public:
     Words path(Words::value_type const& to);
 
     /**
-     * @brief Whether two words are neighbours.
+     * @brief Whether the two words are neighbours.
      * @param lhs
      * @param rhs
      * @return True if lhs and lhs are same length and

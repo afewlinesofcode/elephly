@@ -34,7 +34,7 @@ void Words::filter(filter_type const& f)
 
 /**
  * @brief Get position of a word.
- * @return Index of a word in a collection or MAX_INT of not found.
+ * @return Index of a word in a collection or MAX_INT if not found.
  */
 Words::size_type Words::find(value_type const& s)
 {

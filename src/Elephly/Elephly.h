@@ -16,6 +16,7 @@ namespace Elephly
 
 /**
  * @brief Elephly the facade.
+ * Introduces interfaces for reading words streams and performing searches.
  */
 class Elephly
 {

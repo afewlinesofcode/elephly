@@ -45,7 +45,7 @@ void WordsGraph::search(Words::value_type const& from)
                  );
 
     /*
-     * Perform a search
+     * Perform a search.
      */
     boost::dijkstra_shortest_paths(
         graph_,
@@ -103,7 +103,7 @@ Words WordsGraph::path(Words::value_type const& to)
 }
 
 /**
- * @brief Whether two words are neighbours.
+ * @brief Whether the two words are neighbours.
  * @param lhs
  * @param rhs
  * @return True if lhs and lhs are same length and
@@ -179,7 +179,7 @@ void WordsGraph::initGraph()
         auto v = boost::vertex(pos, graph_);
 
         /*
-         * ... compare with all previously added words.
+         * ... is compared with all previous words.
          */
         for (size_t i = 0; i < pos; ++i)
         {
