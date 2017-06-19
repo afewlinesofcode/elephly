@@ -1,35 +1,45 @@
 Elephly
 =======
 
-Тестовое задание. Сделать муху из слона.
+Test task.
+
+Example: convert *abc* to *xyz* having dictionary with *abz*, *bbz*, *abx*, *xbz*.
+
+Only one letter can be changed per step.
+
+Solution:
+
+```
+abc->abz->xbz->xyz
+```
 
 
-Собрать всё
+Build all
 ```
 make
 ```
 
-Собрать только исполняемый файл
+Build executable
 ```
 make build
 ```
 
-Собрать только тесты
+Build tests
 ```
 make build_test
 ```
 
-Запустить тесты
+Run tests
 ```
 make test
 ```
 
-Запустить программу с примерами (word.txt, dict.txt)
+Run program with sample data (word.txt, dict.txt)
 ```
 make run
 ```
 
-Очистить всё
+Clean all
 ```
 make clean
 ```
